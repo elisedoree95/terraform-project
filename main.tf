@@ -14,10 +14,10 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = "ami-045269a1f5c90a6a0"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = ["sg-09ead194696b4c2cd", "sg-0bf772cfe44c007a2"]
-  subnet_id              = "subnet-028be42059578e952"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [var.vpc_security_group_id]
+  subnet_id              = var.subnet_id
 
   tags = {
     Name = "ExampleAppServerInstance"
@@ -25,10 +25,10 @@ resource "aws_instance" "app_server" {
 }
 
 resource "aws_instance" "web_server" {
-  ami                    = "ami-045269a1f5c90a6a0"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = ["sg-09ead194696b4c2cd", "sg-0bf772cfe44c007a2"]
-  subnet_id              = "subnet-028be42059578e952"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [var.vpc_security_group_id]
+  subnet_id              = var.subnet_id
 
   tags = {
     Name = "ExampleAppServerInstance"
@@ -36,7 +36,7 @@ resource "aws_instance" "web_server" {
 }
 
 resource "aws_s3_bucket" "mybucket" {
-  bucket = "elise-metroc-0114"
+  bucket = var.bucket_name
 
   tags = {
     Name        = "My bucket"
